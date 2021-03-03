@@ -67,12 +67,55 @@ const promptUser = () =>
         }
     ]);
 
-promptUser()
 // TODO: Create a function to write README file
-function writeToFile(fileName, data) { }
+function writeToFile(fileName, data) {
+
+    let readMe =
+        `# ${data.title}
+
+## Description
+${data.description}
+    
+    
+## Table of Contents
+- [Installation](#installation)
+- [Usage](#usage)
+- [Credits](#credits)
+- [License](#license)
+    
+    
+## Installation
+${data.installation}
+    
+## Usage
+${data.usage}
+    
+## License
+${data.license}
+    
+## Contributing
+${data.contributors}
+    
+## Tests
+${data.test}
+
+## Questions
+${data.github}`
+    fs.writeFileSync('README.md', readMe);
+
+}
 
 // TODO: Create a function to initialize app
-function init() { }
+function init() {
+    promptUser().then((data) => {
+        try {
+            const file = writeToFile("README.md", data);
+            console.log("Successfully wrote readme", file);
+        } catch (error) {
+            console.log(error)
+        }
+    })
+}
 
 // Function call to initialize app
 init();
